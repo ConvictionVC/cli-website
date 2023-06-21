@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>aalib.js :: Evangeline</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body class="inverse">
+    <script type="text/javascript" src="../dist/aalib.js"></script>
+    <script type="text/javascript">
+        aalib.read.image.fromURL("../resources/evangeline.jpg")
+            .map(aalib.aa({ width: 450, height: 133, colored: true }))
+            .map(aalib.filter.desaturate())
+            .map(aalib.filter.inverse())
+            .map(aalib.render.html({ background: "#000", fontFamily: "Ubuntu Mono, monospace" }))
+            .do(function (el) {
+                document.body.appendChild(el);
+            })
+            .subscribe();
+    </script>
+</body>
+</html>

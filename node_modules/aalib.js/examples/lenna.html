@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>aalib.js :: Lenna</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <script type="text/javascript" src="../dist/aalib.js"></script>
+    <script type="text/javascript">
+        aalib.read.image.fromURL("../resources/lenna.png")
+            .map(aalib.aa({ width: 210, height: 105, colored: true }))
+            .map(aalib.render.html({ background: "#fff", fontFamily: "Ubuntu Mono, monospace" }))
+            .do(function (el) {
+                document.body.appendChild(el);
+            })
+            .subscribe();
+    </script>
+</body>
+</html>
