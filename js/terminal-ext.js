@@ -1,10 +1,17 @@
 // TODO: make this a proper addon
 
+const LOGO_TYPE = "\033[1m    ______                          _ __ \r\n"+
+"   / ________  ____ ___  ____ ___ (_/  /\r\n"+
+"  / /   / __ \/ __  __  \/ __  __  \/ / __/\r\n"+
+" / /___/ /_/ / / / / / / / / / / / / \r\n"+
+" \\____/\____/_/ /_/ /_/_/ /_/ /_/_/\__/\033[0m\r\n".replaceAll("\n", "\r\n");
+
+
 extend = (term) => {
   term.VERSION = term.VERSION || 2;
   term.currentLine = "";
   term.user = "guest";
-  term.host = "rootpc";
+  term.host = "cnvctn";
   term.cwd = "~";
   term.sep = ":";
   term._promptChar = "$";
@@ -120,7 +127,7 @@ extend = (term) => {
   }
 
   term.printLogoType = () => {
-    term.writeln(term.cols >= 40 ? LOGO_TYPE : "[Root Ventures]\r\n");
+    term.writeln(term.cols >= 40 ? LOGO_TYPE : "[Conviction Partners]\r\n");
   }
 
   term.openURL = (url, newWindow = true) => {
@@ -166,18 +173,10 @@ extend = (term) => {
 
   term.init = (user = "guest", preserveHistory = false) => {
     fitAddon.fit();
-    preloadASCIIArt();
-    preloadFiles();
     term.reset();
     term.printLogoType();
-    if (term.VERSION == 2) {
-      term.stylePrint(`\n${colorText("New version of Root Ventures detected.", "user")}`);
-      term.stylePrint(`Please upgrade your terminal with ${colorText("upgrade", "command")}.`);
-      term.stylePrint(`Type ${colorText("help", "command")} to get started. Or type ${colorText("exit", "command")} for web version.`, false);
-    } else {
-      term.stylePrint('Welcome to the Root Ventures terminal. Seeding bold engineers!');
-      term.stylePrint(`Type ${colorText("help", "command")} to get started. Or type ${colorText("exit", "command")} for web version.`, false);
-    }
+    term.stylePrint(`\n${colorText("Welcome to the Commit site!", "user")}`);
+    term.stylePrint(`Type ${colorText("help", "command")} to get started.`, false);
 
     term.user = user;
     if (!preserveHistory) {

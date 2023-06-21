@@ -1,5 +1,8 @@
-const whoisRoot = "Root Ventures is a San Francisco-based hard tech seed fund managing $300M+ AUM. As engineers ourselves, we specialize in leading initial funding for founders tackling new technical opportunities. Our initial investments typically range from $2-3M. With a selective few new deals a year and 2/3 of our funds in reserve, we are committed to being a long-term partner, supporting each funding round and bridging any gaps in between. Try %whois% and one of avidan, kane, chrissy, lee, emily, or laelah to learn more about our team.";
-const timeUnit = 1000; // useful for development, set to 10 to run faster, set to 1000 for production
+const whoisConviction1 = "Conviction is a new venture capital firm, founded on the idea that artificial intelligence and machine learning will be transformative technologies for the next generation of companies and builders. We believe these technologies will have broad, cross-industry impact, and we are excited to work with founders at every layer of the stack, from chips and research labs to AI-native applications.";
+const whoisConviction2 = "We want to build a firm that is hands-on, deep in our domain, long-term in our orientation, and committed to community. To that end, we're lucky to count the founders, CEOs, or COOs of Amplitude, Anchorage, Benchling, Coda, Coinbase, Deepmind, Dropbox, Duo, Hubspot, Figma, Front, Gusto, Instacart, Mongo, Notion, Okta, Rippling, Rubrik, Shopify, Stripe, Workday, Zillow, Zoom and other pioneering tech companies as LPs. We're excited to work with the next founders who will build companies to join their ranks.";
+const whoisCommit1 = "Commit is a community program for young builders who want to work on new things in AI. Openminded, force-of-nature young people are some of the most powerful forces in the world. We want to enable them with a just-as-powerful network.";
+const whoisCommit2 = "Though cohorts are onboarded annually, we are building a lifelong network of AI innovators, with mentorship from the Conviction team, the Conviction family of companies and Conviction alums. Use %apply% to join us!";
+const timeUnit = 10; // useful for development, set to 10 to run faster, set to 1000 for production
 let killed = false;
 
 const commands = {
@@ -28,64 +31,57 @@ const commands = {
 
     if (!name) {
       term.stylePrint("%whois%: Learn about the firm, or a partner - usage:\r\n");
-      term.stylePrint("%whois% root");
+      term.stylePrint("%whois% conviction");
       for (p of people) {
         term.stylePrint(`%whois% ${p}`);
       }
-    } else if (name == "root") {
-      const description = whoisRoot;
-      term.printArt("rootvc-square");
-      term.stylePrint(description);
+    } else if (name == "conviction") {
+      term.stylePrint(whoisConviction1);
+      term.stylePrint("\r\n");
+      term.stylePrint(whoisConviction2);
     } else if (Object.keys(team).includes(name)) {
       const person = team[name];
-      term.printArt(name);
-      term.stylePrint(`\r\n${person["name"]}, ${person["title"]} - ${name}@root.vc`);
-      term.stylePrint(`${person["linkedin"]}\r\n`);
+      term.stylePrint(`\r\n${person["name"]}, ${person["title"]} - ${name}@conviction.com`);
+      term.stylePrint(`${person["twitter"]}\r\n`);
       term.stylePrint(person["description"]);
     } else {
       term.stylePrint(`User ${name || ''} not found. Try:\r\n`);
-      term.stylePrint("%whois% root");
+      term.stylePrint("%whois% conviction");
       for (p of people) {
         term.stylePrint(`%whois% ${p}`);
       }
     }
   },
 
-  tldr: function(args) {
-    const name = (args[0] || "");
+  hackathon: function(args) {
+    const name = args[0];
+    const teams = Object.keys(hackathon);
+
     if (!name) {
-      const companies = Object.keys(portfolio);
-      term.stylePrint("%tldr%: Learn about a portfolio company - usage:\r\n");
-      for (c of companies.sort()) {
-        const data = portfolio[c];
-        const tabs = c.length > 10 ? "\t" : "\t\t";
-        const sep = term.cols >= 76 ? tabs : "\r\n";
-        term.stylePrint(`%tldr% ${c}${sep}${data["url"]}`);
-        if (term.cols < 76 && c != companies[companies.length - 1]) {
-          term.writeln("");
-        }
+      term.stylePrint("%hackathon%: Learn about a hackathon project:\r\n");
+      for (p of teams) {
+        term.stylePrint(`%hackathon% ${p}`);
       }
-    } else if (!portfolio[name]) {
-      term.stylePrint(`Portfolio company ${name} not found. Should we talk to them? Email us: hello@root.vc`);
+    } else if (Object.keys(hackathon).includes(name)) {
+      const team = hackathon[name];
+      term.stylePrint(`\r\n${name}`);
+      term.stylePrint(`${team["description"]}`);
+      term.stylePrint(`${team["team"]}`);
+      term.stylePrint(`${team["link"]}`);
     } else {
-      const company = portfolio[name];
-      term.cols >= 60 ? term.printArt(name) : term.writeln("");
-      term.stylePrint(company["name"]);
-      term.stylePrint(company["url"]);
-      if (company["memo"]) {
-        term.stylePrint(`Investment Memo: ${company["memo"]}`);
-      }
-      term.stylePrint("");
-      term.stylePrint(company["description"]);
-      if (company["demo"]) {
-        term.stylePrint(`Try it with command: %${name}%`);
+      term.stylePrint(`User ${name || ''} not found. Try:\r\n`);
+      for (p of teams) {
+        term.stylePrint(`%hackathon% ${p}`);
       }
     }
   },
 
-  git: function() {
-    term.displayURL("https://github.com/rootvc/cli-website");
+  commit: function() {
+    term.stylePrint(whoisCommit1);
+    term.stylePrint("\r\n");
+    term.stylePrint(whoisCommit2);
   },
+
 
   test: function() {
     term.openURL("https://gfycat.com/ifr/WhiteBountifulAfricangroundhornbill");
@@ -95,25 +91,10 @@ const commands = {
     term.command("pine");
   },
 
-  github: function() {
-    term.displayURL("https://github.com/rootvc");
-  },
-
   twitter: function() {
-    term.displayURL("https://twitter.com/rootvc");
-    term.displayURL("https://twitter.com/machinepix");
-  },
-
-  instagram: function() {
-    term.displayURL("https://instagram.com/machinepix/");
-  },
-
-  insta: function() {
-    term.command("instagram");
-  },
-
-  other: function() {
-    term.stylePrint("Yeah, I didn't literally mean %other%. I mean try some Linux commands");
+    term.displayURL("https://twitter.com/w_conviction");
+    term.displayURL("https://twitter.com/saranormous");
+    term.displayURL("https://twitter.com/prnvrdy");
   },
 
   echo: function(args) {
@@ -168,44 +149,6 @@ const commands = {
         break;
       case "/home":
         term.cwd = "home";
-        break;
-      case "guest":
-      case "root":
-        if (term.cwd == "home") {
-          if (term.user == dir) {
-            term.command("cd ~");
-          } else {
-            term.stylePrint(`You do not have permission to access this directory`);
-          }
-        } else {
-          term.stylePrint(`No such directory: ${dir}`);
-        }
-        break;
-      case "../home/avidan":
-      case "../home/kane":
-      case "../home/chrissy":
-      case "../home/lee":
-      case "../home/emily":
-      case "../home/laelah":
-        if (term.cwd == "~" || term.cwd == "bin") {
-          term.command(`cd ${dir.split("/")[2]}`);
-        } else {
-          term.stylePrint(`No such directory: ${dir}`);
-        }
-        break;
-      case "/home/avidan":
-      case "/home/kane":
-      case "/home/chrissy":
-      case "/home/lee":
-      case "/home/emily":
-      case "/home/laelah":
-      case "avidan":
-      case "kane":
-      case "chrissy":
-      case "lee":
-      case "emily":
-      case "laelah":
-        term.stylePrint(`You do not have permission to access this directory`);
         break;
       case "/bin":
         term.cwd = "bin";
@@ -264,67 +207,6 @@ const commands = {
       term.writeln(file);
     } else {
       term.stylePrint(`No such file or directory: ${filename}`);
-    }
-  },
-
-  finger: function(args) {
-    const user = args[0];
-
-    switch (user) {
-      case 'guest':
-        term.stylePrint("Login: guest            Name: Guest");
-        term.stylePrint("Directory: /home/guest  Shell: /bin/zsh");
-        break;
-      case 'root':
-        term.stylePrint("Login: root             Name: That's Us!");
-        term.stylePrint("Directory: /home/root   Shell: /bin/zsh");
-        break;
-      case 'avidan':
-      case 'kane':
-      case 'chrissy':
-      case 'lee':
-      case 'emily':
-      case 'laelah':
-        term.stylePrint(`Login: ${user}   Name: ${team[user]["name"]}`);
-        term.stylePrint(`Directory: /home/${user}   Shell: /bin/zsh`);
-        break;
-      default:
-        term.stylePrint(user ? `%finger%: ${user}: no such user` : "usage: %finger% [user]");
-        break;
-    }
-  },
-
-  groups: function(args) {
-    const user = args[0];
-
-    switch (user) {
-      case 'guest':
-        term.stylePrint("guest lps founders engineers investors");
-        break;
-      case 'root':
-        term.stylePrint("wheel investors engineers hardtech firms");
-        break;
-      case 'avidan':
-        term.stylePrint("wheel investors engineers managingpartner handypersons tinkers agtech foodtech foodies coffeesnobs");
-        break;
-      case 'kane':
-        term.stylePrint("wheel investors engineers partners tinkerers cad motorcyclists gearheads machinepix sportshooters gamers");
-        break;
-      case 'chrissy':
-        term.stylePrint("wheel investors engineers partners electrical manufacturing ecad wearables healthtech gearheads automotive sportshooters");
-        break;
-      case 'lee':
-        term.stylePrint("wheel investors engineers partners software devtools data ai+ml gamers winesnobs");
-        break;
-      case 'emily':
-        term.stylePrint("wheel investors engineers principals mechanical space automotive winesnobs");
-        break;
-      case 'laelah':
-        term.stylePrint("wheel admin operations miracleworkers gamers");
-        break;
-      default:
-        term.stylePrint(user ? `%groups%: ${user}: no such user` : "usage: %groups% [user]");
-        break;
     }
   },
 
@@ -388,7 +270,7 @@ const commands = {
   },
 
   pine: function() {
-    term.openURL("mailto:hello@root.vc");
+    term.openURL("mailto:commit@conviction.com");
   },
 
   curl: function(args) {
@@ -423,63 +305,18 @@ const commands = {
     term.stylePrint("Just call me HAL.");
   },
 
-  df: function() {
-    term.stylePrint("Nice try. Just get a Dropbox.");
-  },
 
   kill: function(args) {
-    if (args && args.slice(-1) == 337) {
-      killed = true;
-      term.stylePrint("Phew! Thanks for killing that crypto miner process for us!");
-      term.stylePrint("As a thank you for your hard work, please have a special gift on us.");
-      term.stylePrint("\r\n%easterbunny% name email streetaddress zip\r\n");
-      term.stylePrint("One last thing though. We're going to need to you url encode each of those individual string parameters yourself. Sorry, the crypto miner used up all our resources. This is definitely not a test.")
-    } else {
-      term.stylePrint("You can't kill me!");
-    }
+    term.stylePrint("You can't kill me!");
   },
 
   killall: function(args) {
     term.command(`kill ${args.join(" ")}`);
   },
 
-  easterbunny: async function(args) {
-    term.locked = true;
-
-    if (killed) {
-      if (term.VERSION != 3) {
-        term.stylePrint("%easterbunny% only available in version 3.0. Use %upgrade% to upgrade.");
-      } else if (args.length != 4) {
-        term.stylePrint("There should be 4 arguments: name email streetaddress zip (each url encoded).")
-      }
-      else {
-        const name = args[0];
-        const email = args[1];
-        const streetaddress = args[2];
-        const zip = args[3];
-
-        const url = `https://hooks.zapier.com/hooks/catch/36670/bvhesbe?Name=${name}&Email=${email}&Address=${streetaddress}&Zip=${zip}`;
-        const res = await fetch(url);
-        const data = await res.json();
-        console.log(JSON.stringify(data));
-
-        term.write(`\r\n${colorText("==>", "hyperlink")} Requesting ${url}`);
-        await term.progressBar(1 * timeUnit);
-        await term.dottedPrint('\r\nRecording your info for a special prize', 3, false);
-        term.writeln(data.status);
-
-        term.prompt();
-        term.locked = false;
-      }
-    } else {
-      // lol
-      term.stylePrint(`Command not found: %easterbunny%. Try 'help' to get started.`);
-    }
-  },
-
   locate: function() {
-    term.stylePrint("Root Ventures");
-    term.stylePrint("2670 Harrison St");
+    term.stylePrint("Conviction Partners");
+    term.stylePrint("660 York St");
     term.stylePrint("San Francisco, CA 94110");
   },
 
@@ -535,7 +372,7 @@ const commands = {
   },
 
   sudo: function(args) {
-    if (term.user == "root") {
+    if (term.user == "conviction") {
       term.command(args.join(" "));
     }
     else {
@@ -544,9 +381,9 @@ const commands = {
   },
 
   su: function(args) {
-    user = args[0] || "root";
+    user = args[0] || "conviction";
 
-    if (user == "root" || user == "guest") {
+    if (user == "conviction" || user == "guest") {
       term.user = user;
       term.command("cd ~");
     } else {
@@ -570,14 +407,6 @@ const commands = {
     term.stylePrint("Wow. Maybe don't enter your password into a sketchy web-based term.command prompt?");
   },
 
-  man: function(args) {
-    term.command(`tldr ${args}`);
-  },
-
-  woman: function(args) {
-    term.command(`tldr ${args}`);
-  },
-
   ping: function() {
     term.stylePrint("pong");
   },
@@ -595,13 +424,13 @@ const commands = {
   uname: function(args) {
     switch (args[0]) {
       case "-a":
-        term.stylePrint("RootPC rootpc 0.0.1 RootPC Kernel Version 0.0.1 root:xnu-31415.926.5~3/RELEASE_X86_64 x86_64");
+        term.stylePrint("CnvctnVC cnvctn 0.0.1 CnvctnVC Kernel Version 0.0.1 root:xnu-31415.926.5~3/RELEASE_X86_64 x86_64");
         break;
       case "-mrs":
-        term.stylePrint("RootPC 0.0.1 x86_64");
+        term.stylePrint("CnvctnVC 0.0.1 x86_64");
         break;
       default:
-        term.stylePrint("RootPC");
+        term.stylePrint("CnvctnVC");
     }
   },
 
@@ -645,46 +474,6 @@ const commands = {
     term.stylePrint("please instead build a webstore with macros. in the meantime, the result is: " + eval(args.join(" ")));
   },
 
-  upgrade: async function() {
-    term.VERSION = 3;
-    term.init();
-    term.locked = true;
-
-    // small convenience method for changing spacing to newlines for mobile
-    const m = (str) => term.cols < 40 ? str.replaceAll(/\s\s+/g, "\r\n") : str;
-
-    term.write(`\r\n${colorText("==>", "hyperlink")} Downloading https://ghcr.io/v2/homebrew/core/rootvc/manifests/3.0.0`);
-    await term.progressBar(4 * timeUnit);
-    term.write(`\r\n${colorText("==>", "hyperlink")} Downloading https://ghcr.io/v2/homebrew/core/rust/blobs/sha256:51869c798355307b59992918e9a595c53072d7a29458dbe5b8d105b63d3dd1c0`);
-    await term.progressBar(2 * timeUnit);
-    term.write(`\r\n${colorText("==>", "hyperlink")} Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:51869c798355307b59992918e9a595c53072d7a29458dbe5b8d105b6`);
-    await term.progressBar(1 * timeUnit);
-    await term.delayStylePrint("\r\n", 1 * timeUnit);
-    await term.dottedPrint('Calculating new fund size', 3);
-    await term.delayPrint(`Updated fund size:          ${colorText("$150M", "prompt")}\r\n`, 1 * timeUnit);
-    await term.delayPrint(`Updated typical check size: ${colorText("$2-3M", "prompt")}\r\n`, 1 * timeUnit);
-    await term.delayPrint(m(`Found mission:              ${colorText("Seeding bold engineers.", "user")}\r\n`), 1 * timeUnit);
-    await term.delayPrint(m(`Thesis unchanged:           ${colorText("Investing at the earliest stages of technical founders taking engineering risk.", "user")}\r\n`), 1 * timeUnit);
-    await term.delayPrint(m(`Required dependencies:      ${colorText("New founders.", "user")}\r\n`), 1 * timeUnit);
-    await term.delayStylePrint(m(`Updating jobs:              Found 2 new jobs. Use %jobs% to learn more.`), 1 * timeUnit);
-
-    await term.delayPrint(`\r\n${colorText("You are now running Root Ventures version 3.0.", "hyperlink")}\r\n`, 1 * timeUnit);
-    await term.delayStylePrint("Read more here: https://bit.ly/rootvc-fund3", 1 * timeUnit);
-    await term.delayPrint("Note that VERSION 3.0 is an unstable build of the terminal.\r\n", 1 * timeUnit);
-    await term.delayStylePrint("Please report any bugs you find: https://github.com/rootvc/cli-website/issues/new\r\n", 1 * timeUnit);
-
-    term.prompt();
-    term.clearCurrentLine();
-    term.locked = false;
-  },
-
-  jobs: function() {
-    term.stylePrint(`[1]   Running                 analyst &`);
-    term.stylePrint(`[2]   Running                 hacker &`);
-    term.stylePrint("\r\nUse %fg% [id] to see details of a job.")
-    term.stylePrint("Yes, we know that's not exactly how %jobs% works, but close enough.");
-  },
-
   bg: function(args) {
     term.stylePrint(`Sorry. If you want to background one of these jobs, you'll need to help us fill it. Try %fg% ${args} instead.`);
   },
@@ -701,24 +490,10 @@ const commands = {
   },
 
   apply: function(args) {
-    const email = "join@root.vc";
-    const role = (args == 2) ? "hacker in residence" : "analyst";
-    const subject = `Applying for ${role} at Root Ventures!`;
-    const body = "Wow! I love your website. It's so cool. I definitely want to work with this awesome team. Here's my resume.";
-    location.href = `mailto:${email}?subject=${subject}&body=${body}`;
-  }
-}
-
-// Add commands for company demos
-for (kv of Object.entries(portfolio)) {
-  const key = kv[0];
-  const val = kv[1];
-
-  if (val["demo"]) {
-    commands[key] = () => term.displayURL(val["demo"]);
+    term.stylePrint("Applications have closed for Commit 2023! Please reach out at commit@conviction.com if you feel strongly about your application :)");
   }
 }
 
 function _filesHere() {
-  return _DIRS[term.cwd].filter((e) => e != 'README.md' || term.user == "root");
+  return _DIRS[term.cwd].filter((e) => e != 'README.md' || term.user == "conviction");
 }

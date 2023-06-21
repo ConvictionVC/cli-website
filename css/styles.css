@@ -20,7 +20,7 @@ body {
   height: 100%;
 }
 
-:root {
+:conviction {
   --brand-bg-color: #2c2c2c;
   --brand-txt-color: #fff;
   --brand-link-color: #fff;

@@ -6,35 +6,34 @@
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link rel="shortcut icon" href="/favicon.png">
-      <title>Root Ventures</title>
-      <link rel="canonical" href="https://www.root.vc"/>
-      <meta property="og:site_name" content="Root Ventures"/>
-      <meta property="og:title" content="Root Ventures"/>
-      <meta property="og:url" content="https://www.root.vc"/>
+      <title>Commit -- Conviction</title>
+      <link rel="canonical" href="https://www.conviction.com"/>
+      <meta property="og:site_name" content="Commit -- Conviction"/>
+      <meta property="og:title" content="Conviction Partners"/>
+      <meta property="og:url" content="https://www.conviction.com"/>
       <meta property="og:type" content="website"/>
-      <meta property="og:description" content="Hard tech seed investors supporting founders at the earliest stages. Best coffee in San Francisco ☕️"/>
+      <meta property="og:description" content="Fellowship program for the top young minds in AI.☕️"/>
       <meta property="og:image" content="images/og-image.png"/>
       <meta property="og:image:width" content="1200"/>
       <meta property="og:image:height" content="630"/>
-      <meta itemprop="name" content="Root Ventures"/>
-      <meta itemprop="url" content="https://www.root.vc"/>
-      <meta itemprop="description" content="Hard tech seed investors supporting founders at the earliest stages. Best coffee in San Francisco ☕️"/>
+      <meta itemprop="name" content="Conviction Partners"/>
+      <meta itemprop="url" content="https://www.conviction.com"/>
+      <meta itemprop="description" content="Fellowship program for the top young minds in AI.☕️"/>
       <meta itemprop="thumbnailUrl" content="images/og-image.png"/>
       <link rel="image_src" href="images/og-image.png" />
       <meta itemprop="image" content="images/og-image.png"/>
-      <meta name="twitter:title" content="Root Ventures"/>
+      <meta name="twitter:title" content="Conviction Partners"/>
       <meta name="twitter:image" content="images/og-image.png"/>
-      <meta name="twitter:url" content="https://www.root.vc"/>
+      <meta name="twitter:url" content="https://www.conviction.com"/>
       <meta name="twitter:card" content="summary"/>
-      <meta name="twitter:description" content="Hard tech seed investors supporting founders at the earliest stages. Best coffee in San Francisco ☕️"/>
-      <meta name="description" content="Hard tech seed investors supporting founders at the earliest stages. Best 
-      coffee in San Francisco ☕️" />
+      <meta name="twitter:description" content="Fellowship program for the top young minds in AI.☕️"/>
+      <meta name="description" content="Fellowship program for the top young minds in AI." />
       <meta name="twitter:card" content="summary_large_image">
-      <meta name="twitter:creator" content="@rootvc">
-      <meta name="twitter:site" content="@rootvc">
-      <meta name="twitter:title" content="Root Ventures" />
-      <meta name="twitter:description" content="Join us! Investing in hard tech, automation, manufacturing, hardware, robotics, and more.">
-      <meta name="twitter:image" content="https://root.vc/images/og-image.png">
+      <meta name="twitter:creator" content="@w_conviction">
+      <meta name="twitter:site" content="@w_conviction">
+      <meta name="twitter:title" content="Conviction Partners" />
+      <meta name="twitter:description" content="Fellowship program for the top young minds in AI.">
+      <!-- <meta name="twitter:image" content="https://conviction.com/images/og-image.png"> -->
 
       <!-- Google Tag Manager -->
       <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -44,26 +43,24 @@
         })(window,document,'script','dataLayer','GTM-TQ954FQ');</script>
       <!-- End Google Tag Manager -->
 
-      <script src="js/aalib.js"></script>
-      <script src="js/xterm.js"></script>
-      <script src="js/xterm-addon-fit.js"></script>
-      <script src="js/xterm-addon-web-links.js"></script>
+      <script src="node_modules/xterm/lib/xterm.js"></script>
+      <script src="node_modules/xterm-addon-fit/lib/xterm-addon-fit.js"></script>
+      <script src="node_modules/xterm-addon-web-links/lib/xterm-addon-web-links.js"></script>
       <script src="js/terminal.js"></script>
       <script src="js/terminal-ext.js"></script>
-      <script src="js/ascii-art.js"></script>
       <script src="config/help.js"></script>
-      <script src="config/portfolio.js"></script>
       <script src="config/team.js"></script>
-      <script src="config/commands.js"></script>
+      <script src="config/hackathon.js"></script>
       <script src="config/fs.js"></script>
-      <script src="config/jobs.js"></script>
-      <link rel="stylesheet" href="css/xterm.css" />
+      <script src="config/commands.js"></script>
+
+      <link rel="stylesheet" href="node_modules/xterm/css/xterm.css" />
       <link rel="stylesheet" href="css/styles.css" />
     </head>
     <body>
-      <h1 style="display: none;">Root Ventures | Seeding bold engineers</h1>
-      <h2 style="display: none;">Seed stage venture capital firm investing in hard tech. San Francisco, CA</h2>
-      <img id="logo" src = "images/logo.png" alt="Root Ventures" style="display: none;"/>
+      <h1 style="display: none;">Conviction Commit | Seeking the best young minds in AI</h1>
+      <h2 style="display: none;">Fellowship program for the top young minds in AI. San Francisco, CA</h2>
+      <img id="logo" src = "images/logo.png" alt="Conviction Partners" style="display: none;"/>
       <!-- Google Tag Manager (noscript) -->
       <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TQ954FQ"
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -76,11 +73,12 @@
         const fitAddon = new FitAddon.FitAddon();
         const webLinksAddon = new WebLinksAddon.WebLinksAddon();
 
+        term.setOption("fontSize", 16);
         term.open(document.getElementById("terminal"));
         term.loadAddon(fitAddon);
         term.loadAddon(webLinksAddon);
         extend(term);
-        runRootTerminal(term);
+        runCommitTerminal(term);
       </script>
     </body>
   </html>

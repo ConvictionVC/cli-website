@@ -1,4 +1,4 @@
-function runRootTerminal(term) {
+function runCommitTerminal(term) {
   if (term._initialized) {
     return;
   }
@@ -91,9 +91,9 @@ function runRootTerminal(term) {
             }
             break;
           case '\t': // tab
-            cmd = term.currentLine.split(" ")[0];
-            const rest = term.currentLine.slice(cmd.length).trim();
-            const autocompleteCmds = Object.keys(commands).filter((c) => c.startsWith(cmd));
+            const currCmd = term.currentLine.split(" ")[0];
+            const rest = term.currentLine.slice(currCmd.length).trim();
+            const autocompleteCmds = Object.keys(commands).filter((c) => c.startsWith(currCmd));
             var autocompleteArgs;
 
             // detect what to autocomplete
@@ -102,13 +102,11 @@ function runRootTerminal(term) {
               term.stylePrint(`\r\n${autocompleteCmds.sort().join("   ")}`);
               term.prompt();
               term.setCurrentLine(oldLine);
-            } else if (["cat", "tail", "less", "head", "open", "mv", "cp", "chown", "chmod"].includes(cmd)) {
+            } else if (["cat", "tail", "less", "head", "open", "mv", "cp", "chown", "chmod"].includes(currCmd)) {
               autocompleteArgs = _filesHere().filter((f) => f.startsWith(rest));
-            } else if (["whois", "finger", "groups"].includes(cmd)) {
+            } else if (["whois", "finger", "groups"].includes(currCmd)) {
               autocompleteArgs = Object.keys(team).filter((f) => f.startsWith(rest));
-            } else if (["man", "woman", "tldr"].includes(cmd)) {
-              autocompleteArgs = Object.keys(portfolio).filter((f) => f.startsWith(rest));
-            } else if (["cd"].includes(cmd)) {
+            } else if (["cd"].includes(currCmd)) {
               autocompleteArgs = _filesHere().filter((dir) => dir.startsWith(rest) && !_DIRS[term.cwd].includes(dir));
             }
 
@@ -118,10 +116,10 @@ function runRootTerminal(term) {
               term.writeln(`\r\n${autocompleteArgs.join("   ")}`);
               term.prompt();
               term.setCurrentLine(oldLine);
-            } else if (commands[cmd] && autocompleteArgs && autocompleteArgs.length > 0) {
-              term.setCurrentLine(`${cmd} ${autocompleteArgs[0]}`);
-            } else if (commands[cmd] && autocompleteArgs && autocompleteArgs.length == 0) {
-              term.setCurrentLine(`${cmd} ${rest}`);
+            } else if (commands[currCmd] && autocompleteArgs && autocompleteArgs.length > 0) {
+              term.setCurrentLine(`${currCmd} ${autocompleteArgs[0]}`);
+            } else if (commands[currCmd] && autocompleteArgs && autocompleteArgs.length == 0) {
+              term.setCurrentLine(`${currCmd} ${rest}`);
             } else if (autocompleteCmds && autocompleteCmds.length == 1) {
               term.setCurrentLine(`${autocompleteCmds[0]} `);
             }
@@ -140,11 +138,11 @@ function runRootTerminal(term) {
 
 function colorText(text, color) {
   const colors = {
-    "command": "\x1b[1;35m",
-    "hyperlink": "\x1b[1;34m",
-    "user": "\x1b[1;33m",
+    "command": "\x1b[38;5;75m",
+    "hyperlink": "\x1b[38;5;202m",
+    "user": "\x1b[38;5;119m",
     "prompt": "\x1b[1;32m",
     "bold": "\x1b[1;37m"
   }
-  return `${colors[color] || ""}${text}\x1b[0;38m`;
+  return `${colors[color] || ""}${text}\x1b[38;5;147m`;
 }
