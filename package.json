@@ -1,7 +1,7 @@
 {
-  "name": "rootvc-cli-website",
+  "name": "conviction-commit-website",
   "version": "0.1.0",
-  "description": "Root Ventures' awesome website",
+  "description": "Conviction Commit Website",
   "dependencies": {
     "aalib.js": "^2.0.0",
     "netlify-cli": "^6.14.7",
@@ -12,10 +12,14 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:rootvc/cli-website.git"
+    "url": "git@github.com:ConvictionVC/cli-website.git"
   },
   "scripts": {
-    "build": "npm install && mkdir -p ./css && cp node_modules/xterm/css/*.css ./css && mkdir -p ./js && cp node_modules/xterm*/lib/*.js* ./js && cp node_modules/aalib.js/dist/aalib.js* ./js",
-    "start": "netlify dev"
+    "start": "netlify dev",
+    "predeploy": "npm install && mkdir -p ./css && cp node_modules/xterm/css/*.css ./css && mkdir -p ./js && cp node_modules/xterm*/lib/*.js* ./js && cp node_modules/aalib.js/dist/aalib.js* ./js && npm install && npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
   }
 }
