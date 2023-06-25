@@ -77,7 +77,6 @@ const commands = {
       for (member of team["team"]) {
         term.stylePrint(`   ${member["name"]}, ${member["link"]}`);
       }
-      term.stylePrint(`${team["team"]}`);
       term.stylePrint(`${team["link"]}`);
     } else {
       term.stylePrint(`User ${name || ''} not found. Try:\r\n`);
