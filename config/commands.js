@@ -53,6 +53,14 @@ const commands = {
     }
   },
 
+  sponsors: function() {
+    term.stylePrint("Huge thank you to our sponsors!\r\n");
+
+    for (s of Object.values(sponsors)) {
+      term.stylePrint(`${s["name"]} - ${s["link"]}`);
+    }
+  },
+
   hackathon: function(args) {
     const name = args[0];
     const teams = Object.keys(hackathon);
@@ -64,8 +72,11 @@ const commands = {
       }
     } else if (Object.keys(hackathon).includes(name)) {
       const team = hackathon[name];
-      term.stylePrint(`\r\n${name}`);
-      term.stylePrint(`${team["description"]}`);
+      term.stylePrint(`\r\n${team["description"]}`);
+      term.stylePrint(`\r\nTeam members:`);
+      for (member of team["team"]) {
+        term.stylePrint(`   ${member["name"]}, ${member["link"]}`);
+      }
       term.stylePrint(`${team["team"]}`);
       term.stylePrint(`${team["link"]}`);
     } else {

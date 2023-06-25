@@ -10,5 +10,6 @@ const help = {
   "%email%": "reach out to us",
   "%twitter%": "twitter accounts",
   "%locate%": "physical address",
+  "%sponsors%": "list all sponsors",
   "%test%": "do not use",
 };
