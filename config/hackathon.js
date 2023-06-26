@@ -100,7 +100,7 @@ const hackathon = {
                 link: "https://ananthvivekanand.com",
             },
         ],
-        link: "",
+        link: "https://www.loom.com/share/0b3f78c7a9cc494ea17b1ab0043fe40e",
     },
     snartz: {
         description: "Snartz is a Visual Studio Code extension offering advanced coding assistance and documentation for legacy code systems.",
