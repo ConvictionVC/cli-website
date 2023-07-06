@@ -115,7 +115,7 @@ const hackathon = {
             },
             {
                 name: "Rex Asabor",
-                link: "https://twitter.com/12exyz",
+                link: "https://rexyz.io",
             },
             {
                 name: "Serena Zhang",
